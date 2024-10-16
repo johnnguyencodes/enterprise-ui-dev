@@ -10,17 +10,11 @@
     "test:all": "vitest",
     "test:accessibility": "vitest accessibility --run",
     "coverage": "vitest --coverage --run",
-    "test": "echo \"Navigate into an example and run the tests from there!\" && exit 1",
+    "test": "vitest",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "keywords": [
-    "react",
-    "svelte",
-    "testing",
-    "vite",
-    "vitest"
-  ],
+  "keywords": ["react", "svelte", "testing", "vite", "vitest"],
   "author": "Steve Kinney <hello@stevekinney.net>",
   "homepage": "https://frontendmasters.com/courses/enterprise-ui-dev/",
   "repository": {
