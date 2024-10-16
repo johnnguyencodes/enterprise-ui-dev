@@ -26,8 +26,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
       - run: npm ci
       - run: npm test
 ```
