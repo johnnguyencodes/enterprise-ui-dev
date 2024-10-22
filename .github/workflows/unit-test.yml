@@ -1,4 +1,4 @@
-name: Unit Testsss
+name: Unit Tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build-and-test:
+  unit-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,8 +17,38 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
 
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles(`**/package-lock.json`) }}
+
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests and build
-        run: npm test && npm run build
+      - name: Run tests
+        run: npm test
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles(`**/package-lock.json`) }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
