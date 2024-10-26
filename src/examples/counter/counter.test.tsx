@@ -1,7 +1,6 @@
 // @vitest-environment happy-dom
 
-import { screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import Counter from '.';
 import { render } from './test/utilities';
 
@@ -10,8 +9,7 @@ test('it should render the component', () => {
 });
 
 test('should increment when the increment button is pressed', async () => {
-  // render the component
-  render(<Counter />);
+  const { user } = render(<Counter />);
 
   // Get the current count element and the increment button
   const currentCount = screen.getByTestId('current-count');
@@ -21,7 +19,7 @@ test('should increment when the increment button is pressed', async () => {
   expect(currentCount).toHaveTextContent('0');
 
   // Click the increment button
-  await userEvent.click(incrementButton);
+  await user.click(incrementButton);
 
   // Verify the count is now 1
   expect(currentCount).toHaveTextContent('1');
