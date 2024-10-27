@@ -3,7 +3,7 @@
 import Counter from '.';
 import { render } from './test/utilities';
 
-const setup = (initialCount = 0) => {
+const renderCounter = (initialCount: number) => {
   const { user, getByRole, getByTestId } = render(
     <Counter initialCount={initialCount} />,
   );
@@ -19,7 +19,7 @@ test('it should render the component', () => {
 });
 
 test('should increment when the increment button is pressed', async () => {
-  const { user, currentCount, incrementButton } = setup(0);
+  const { user, currentCount, incrementButton } = renderCounter(0);
 
   // Verify initial count is 0
   expect(currentCount).toHaveTextContent('0');
@@ -32,15 +32,16 @@ test('should increment when the increment button is pressed', async () => {
 });
 
 test('it should render the component with an initial count', () => {
-  const { currentCount } = setup(4000);
+  const { currentCount } = renderCounter(4000);
 
+  // Verify initial count
   expect(currentCount).toHaveTextContent('4000');
 });
 
 test('it should reset the count when the "Reset" button is pressed', async () => {
-  const { user, currentCount, resetButton } = setup(4000);
+  const { user, currentCount, resetButton } = renderCounter(4000);
 
-  // Verify initial count is 4000
+  // Verify initial count
   expect(currentCount).toHaveTextContent('4000');
 
   // Click the reset button
