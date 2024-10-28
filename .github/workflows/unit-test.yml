@@ -64,7 +64,7 @@ jobs:
       - name: Run tests with coverage
         run: npm test -- --coverage
 
-      - name: Arcive test coverage report
+      - name: Archive test coverage report
         uses: actions/upload-artifact@v3
         with:
           name: coverage report
