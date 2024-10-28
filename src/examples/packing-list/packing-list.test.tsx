@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
 import PackingList from '.';
-import { render, waitFor } from 'test/utilities';
+import { render, screen } from 'test/utilities';
 
 const renderPackingList = () => {
   const { user, getByText, getByLabelText, getByRole, getByTestId } = render(
@@ -12,7 +12,6 @@ const renderPackingList = () => {
   const inputField = getByLabelText('New Item Name');
   const addButton = getByRole('button', { name: /add new item/i });
   const unpackedList = getByTestId('unpacked-items-list');
-
   return { user, h1Title, inputField, addButton, unpackedList };
 };
 
@@ -56,4 +55,19 @@ it('adds a new item to the unpacked item list when the clicking "Add New Item"',
 
   await user.click(addButton);
   expect(unpackedList).toHaveTextContent('Macbook Pro');
+  expect(inputField).toHaveValue('');
+});
+
+it('removes the item from the unpacked item list after it has been added', async () => {
+  const { user, inputField, addButton, unpackedList } = renderPackingList();
+
+  await user.type(inputField, 'iPad');
+  await user.click(addButton);
+
+  const removeButton = screen.getByRole('button', {
+    name: /remove ipad/i,
+  });
+  await user.click(removeButton);
+
+  expect(unpackedList).not.toHaveTextContent('iPad');
 });
