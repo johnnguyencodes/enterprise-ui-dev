@@ -67,5 +67,5 @@ jobs:
       - name: Archive test coverage report
         uses: actions/upload-artifact@v3
         with:
-          name: coverage report
+          name: coverage-report
           path: coverage
